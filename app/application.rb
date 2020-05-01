@@ -1,3 +1,5 @@
+require 'pry'
+
 class Application
 
   @@items = ["Apples","Carrots","Pears"]
@@ -13,6 +15,7 @@ class Application
     elsif req.path.match(/search/)
       search_term = req.params["q"]
       resp.write handle_search(search_term)
+      binding.pry
     elsif req.path.match(/cart/)
       if @@cart.empty?
         resp.write "Your cart is empty"
@@ -29,7 +32,6 @@ class Application
       else
         resp.write "We don't have that item"
       end
-
     else
       resp.write "Path Not Found"
     end
